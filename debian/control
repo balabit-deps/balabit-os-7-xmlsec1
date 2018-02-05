@@ -1,0 +1,95 @@
+Source: xmlsec1
+Section: text
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Uploaders: John V. Belmonte <jbelmonte@debian.org>, Rene Engelhard <rene@debian.org>
+Build-Depends: debhelper (>> 9.0.0), dh-autoreconf, chrpath, pkg-config, libxml2-dev (>= 2.8.0), libxslt1-dev (>= 1.0.20), libssl-dev (>= 1.0.0), libgnutls28-dev, libnss3-dev, libgcrypt20-dev
+Standards-Version: 3.9.5
+Homepage: http://www.aleksey.com/xmlsec/
+
+Package: libxmlsec1-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends}, libxmlsec1 (= ${binary:Version}), libxmlsec1-openssl (= ${binary:Version}), libxmlsec1-gnutls (= ${binary:Version}), libxmlsec1-nss (= ${binary:Version}), libxmlsec1-gcrypt (= ${binary:Version}), libc6-dev, libxml2-dev (>= 2.8.0), libxslt1-dev (>= 1.0.20), libssl-dev (>= 1.0.0), libgnutls28-dev, libnss3-dev, libgcrypt20-dev
+Description: Development files for the XML security library
+ The XML Security Library is a C library that implements these XML standards:
+ .
+    * XML Signature
+    * XML Encryption
+ .
+ This package provides development files including documentation, examples,
+ headers, static libraries, and configuration support.
+
+Package: libxmlsec1
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: XML security library
+ The XML Security Library implements standards related to secure handling
+ of XML data.
+ .
+ This package provides dynamic libraries for use by applications.
+ Specifically, it provides all XML security library functionality
+ except for the cryptography engine.
+
+Package: libxmlsec1-openssl
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: Openssl engine for the XML security library
+ The XML Security Library implements standards related to secure handling
+ of XML data.
+ .
+ This package provides dynamic libraries for use by applications.
+ Specifically, it provides the openssl implementation of the XML security
+ library cryptography functions.
+
+Package: libxmlsec1-gnutls
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: Gnutls engine for the XML security library
+ The XML Security Library implements standards related to secure handling
+ of XML data.
+ .
+ This package provides dynamic libraries for use by applications.
+ Specifically, it provides the gnutls implementation of the XML security
+ library cryptography functions.
+
+Package: libxmlsec1-nss
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: Nss engine for the XML security library
+ The XML Security Library implements standards related to secure handling
+ of XML data.
+ .
+ This package provides dynamic libraries for use by applications.
+ Specifically, it provides the nss implementation of the XML security
+ library cryptography functions.
+
+Package: libxmlsec1-gcrypt
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: Gcrypt engine for the XML security library
+ The XML Security Library implements standards related to secure handling
+ of XML data.
+ .
+ This package provides dynamic libraries for use by applications.
+ Specifically, it provides the gcrypt implementation of the XML security
+ library cryptography functions.
+
+Package: xmlsec1
+Section: text
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: XML security command line processor
+ Xmlsec is a command line tool for signature and encryption transformations
+ of XML data.  It is part of the XML Security Library.

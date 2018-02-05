@@ -1,0 +1,209 @@
+Description: Skip any online tests
+ Some tests require access to online services.
+ .
+ Use an environment variable to conditionally skip these
+ tests to support execution in offline build environments.
+Author: James Page <james.page@ubuntu.com>
+Forwarded: no
+
+--- a/tests/testDSig.sh
++++ b/tests/testDSig.sh
+@@ -418,7 +418,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/rsakey.$priv_key_format --pwd secret123" \
+     " "
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-external-b64-dsa" \
+     "base64 sha1 dsa-sha1" \
+@@ -427,7 +427,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123" \
+     " "
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-external-dsa" \
+     "sha1 dsa-sha1" \
+@@ -436,7 +436,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123" \
+     " "
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-keyname" \
+     "sha1 dsa-sha1" \
+@@ -445,7 +445,7 @@ execDSigTest $res_success \
+     "$priv_key_option:test-dsa $topfolder/keys/dsakey.$priv_key_format --pwd secret123" \
+     "$priv_key_option:test-dsa $topfolder/keys/dsakey.$priv_key_format --pwd secret123"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-x509-crt" \
+     "sha1 dsa-sha1" \
+@@ -454,7 +454,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123"\
+     "--trusted-$cert_format $topfolder/keys/cacert.$cert_format"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-x509-sn" \
+     "sha1 dsa-sha1" \
+@@ -463,7 +463,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123"\
+     "--trusted-$cert_format $topfolder/keys/cacert.$cert_format"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-x509-is" \
+     "sha1 dsa-sha1" \
+@@ -472,7 +472,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123"\
+     "--trusted-$cert_format $topfolder/keys/cacert.$cert_format"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-x509-ski" \
+     "sha1 dsa-sha1" \
+@@ -481,7 +481,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123"\
+     "--trusted-$cert_format $topfolder/keys/cacert.$cert_format"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature-retrievalmethod-rawx509crt" \
+     "sha1 dsa-sha1" \
+@@ -490,7 +490,7 @@ execDSigTest $res_success \
+     "$priv_key_option $topfolder/keys/dsakey.$priv_key_format --pwd secret123"\
+     "--trusted-$cert_format $topfolder/keys/cacert.$cert_format --trusted-$cert_format $topfolder/keys/ca2cert.$cert_format"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmldsig-twenty-three/signature" \
+     "base64 xpath enveloped-signature c14n-with-comments sha1 dsa-sha1" \
+@@ -509,7 +509,7 @@ execDSigTest $res_success \
+ # key transport/wrapper algorightms
+ #
+ ##########################################################################
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "" \
+     "merlin-xmlenc-five/encsig-ripemd160-hmac-ripemd160-kw-tripledes" \
+     "ripemd160 hmac-ripemd160 kw-tripledes" \
+@@ -614,14 +614,14 @@ execDSigTest $res_success \
+ #
+ ##########################################################################
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-big" \
+     "base64 xslt xpath sha1 rsa-sha1" \
+     "rsa x509" \
+     "--pubkey-cert-$cert_format certs/rsa-cert.$cert_format" 
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-dsa-detached" \
+     "sha1 dsa-sha1" \
+@@ -642,7 +642,7 @@ execDSigTest $res_success \
+     "dsa x509" \
+     "--trusted-$cert_format certs/dsa-ca-cert.$cert_format --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-dsa-manifest" \
+     "sha1 dsa-sha1" \
+@@ -656,21 +656,21 @@ execDSigTest $res_success \
+     "hmac" \
+     "--hmackey certs/hmackey.bin"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-hmac-sha1-40-c14n-comments-detached" \
+     "c14n-with-comments sha1 hmac-sha1" \
+     "hmac" \
+     "--hmackey certs/hmackey.bin"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-hmac-sha1-40-exclusive-c14n-comments-detached" \
+     "exc-c14n-with-comments sha1 hmac-sha1" \
+     "hmac" \
+     "--hmackey certs/hmackey.bin"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-hmac-sha1-exclusive-c14n-comments-detached" \
+     "exc-c14n-with-comments sha1 hmac-sha1" \
+@@ -691,7 +691,7 @@ execDSigTest $res_success \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-detached" \
+     "sha1 rsa-sha1" \
+@@ -733,42 +733,42 @@ execDSigTest $res_success \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest-x509-data-cert-chain" \
+     "sha1 rsa-sha1" \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest-x509-data-cert" \
+     "sha1 rsa-sha1" \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest-x509-data-issuer-serial" \
+     "sha1 rsa-sha1" \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --untrusted-$cert_format certs/rsa-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest-x509-data-ski" \
+     "sha1 rsa-sha1" \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --untrusted-$cert_format certs/rsa-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest-x509-data-subject-name" \
+     "sha1 rsa-sha1" \
+     "rsa x509" \
+     "--trusted-$cert_format certs/rsa-ca-cert.$cert_format --untrusted-$cert_format certs/rsa-cert.$cert_format --X509-skip-strict-checks --verification-time 2009-01-01+10:00:00"
+ 
+-execDSigTest $res_success \
++[ -z "$OFFLINE" ] && execDSigTest $res_success \
+     "phaos-xmldsig-three" \
+     "signature-rsa-manifest" \
+     "sha1 rsa-sha1" \
